@@ -1,0 +1,72 @@
+**1. 返回什么才好呢**
+```c++
+#include <iostream>
+using namespace std;
+class A {
+public:
+    int val;
+
+    A(int v): val(v) {  // 在此处补充你的代码
+
+    }
+
+    A() {
+        val = 123;
+    }
+
+    A & GetObj() {
+        return * this;
+    }
+};
+
+int main()
+{
+    int m,n;
+    A a;
+    cout << a.val << endl;
+
+    while(cin >> m >> n) {
+        a.GetObj() = m;
+        cout << a.val << endl;
+
+        a.GetObj() = A(n);
+        cout << a.val<< endl;
+    }
+    return 0;
+}
+```
+
+**2. Big & Base 封闭类问题**
+```c++
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Base {
+public:
+    int k;
+    Base(int n):k(n) { }
+};
+class Big
+{
+public:
+    int v;
+    Base b;
+// 在此处补充你的代码
+
+    Big(int n): v(n),b(n) {
+
+    }
+};
+
+int main()
+{
+    int n;
+    while(cin >>n) {
+        Big a1(n);
+        Big a2 = a1;
+        cout << a1.v << "," << a1.b.k << endl;
+        cout << a2.v << "," << a2.b.k << endl;
+    }
+}
+```
