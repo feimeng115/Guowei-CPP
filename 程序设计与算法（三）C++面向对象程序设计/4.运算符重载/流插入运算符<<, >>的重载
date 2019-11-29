@@ -1,0 +1,58 @@
+# 概念
+* cout是什么？ “<<” 为什么能用在 cout上？
+  * cout 是在iostream中定义的，ostream类的对象
+  * “<<” 能用在cout 上是因为，在iostream里对 “<<” 进行了重载
+ 
+* 分别cout << 5; 和 cout << “this”；都能成立，为什么cout << 5 << “this”;也能够成立？
+  * 因为＂cout << 5＂也是返回cout
+
+* ＂<<＂重载成ostream类的成员函数:
+```c++
+  ostream & ostream::operator<<(int n)
+  {
+    …… //输出n的代码
+    return;
+  }
+  ```
+  ```c++
+  ostream & ostream::operator<<(const char * s )
+  {
+    …… //输出s的代码
+    return * this;
+  }
+  ```
+  cout << 5 ; 即 cout.operator<<(5);
+  cout << "this"; 即　cout.operator<<(“this”);
+  cout << 5 << “this”;　即　cout.operator<<(5).operator<<(“this”);
+  
+* cin是什么？ “>>” 为什么能用在cin上？
+  * cin 是在iostream中定义的，istream类的对象
+  * “>>” 能用在cin上是因为，在iostream里对 “>>” 进行了重载
+  
+ # 例子1
+ * 程序输出为 5hello
+ 
+ ```c++
+ #include <iostream>
+using namespace std;
+
+class Student {
+public:
+    int age;
+};
+
+ostream & operator<<(ostream & o, const Student & s) { // 因为不能修改iostream类, 所以只能全局函数重载<<
+    o << s.age;
+    return o;
+}
+
+int main() {
+
+    Student s;
+    s.age = 5;
+    cout << s << "hello"; //　要求输出"5hello"
+
+    return 0;
+}
+
+ ```
