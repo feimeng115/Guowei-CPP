@@ -23,7 +23,7 @@
   **1. 在基类中，一般都将需要隐藏的成员说明为protected成员而非private成员；**
   **2. 范围比private成员要大点**
   
-  ```c++
+```c++
 #include <iostream>
 using namespace std;
 
@@ -61,5 +61,4 @@ int  main()
     
     return 0;
 }
-
-  ```
+```
