@@ -61,3 +61,10 @@ int  main()
 2
 2
 ```
+
+# private, protected派生
+  - protected继承时，基类的public成员和protected成员成为派生类的protected成员。
+  - private继承时，基类的public成员成为派生类的private成员，基类的protected成员成为派生类的不可访问成员。
+  - protected和private继承不是“是”的关系
+  - 一般情况下都应使用public派生，不要使用private和protected派生
+
