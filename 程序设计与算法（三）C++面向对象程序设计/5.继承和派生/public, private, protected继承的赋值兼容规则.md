@@ -2,6 +2,60 @@
   - 派生类的对象可以赋值给基类对象
     - b = d;
   - 派生类对象可以初始化基类引用
-    -base & br = d;
+    - base & br = d;
   - 派生类对象的地址可以赋值给基类指针
     - base * pb = & d
+```c++
+#include <iostream>
+using namespace std;
+
+class Base { // 基类
+public:
+    int n1;
+    Base(int n1_=0) : n1(n1_) {
+
+    }
+};
+
+class Derived : public Base { // public派生类
+public:
+    int n2;
+    Derived(int n1_=0, int n2_=0) : n2(n2_), Base(n1_) {
+
+    }
+};
+
+int  main()
+{
+    Base b;
+    Derived d(1, 2);
+
+    b = d; // 基类将会slicing派生类
+    cout << b.n1 << endl;
+
+    Base &br = d;
+    cout << br.n1 << endl;
+
+    Base *pb = &d;
+    cout << pb->n1 << endl;
+
+    d.n1 = 2;
+    cout << endl;
+    cout << b.n1 << endl;
+    cout << br.n1 << endl;
+    cout << pb->n1 << endl;
+
+    return 0;
+}
+
+```
+输出：
+```
+1
+1
+1
+
+1
+2
+2
+```
