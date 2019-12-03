@@ -38,12 +38,14 @@ int  main()
 
     Base *pb = &d;
     cout << pb->n1 << endl;
+    cout << pb->n2 << endl; // error: ‘class Base’ has no member named ‘n2’, 基类不能访问派生类的成员
 
     d.n1 = 2;
     cout << endl;
     cout << b.n1 << endl;
     cout << br.n1 << endl;
     cout << pb->n1 << endl;
+
 
     return 0;
 }
