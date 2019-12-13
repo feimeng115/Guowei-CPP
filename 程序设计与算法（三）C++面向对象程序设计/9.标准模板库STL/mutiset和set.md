@@ -117,7 +117,15 @@ int main() {
 }
 ```
 
+```
+class A {
 
+}
+
+multiset <A> a;  // 就等价于multiset<A, less<A>> a;
+
+插入元素时，multiset会将被插入元素和已有元素进行比较。由于less模板是用 < 进行比较的，所以,这都要求 A 的对象能用 < 比较，即适当重载了 < 
+```
 
 # set模板类定义
 
