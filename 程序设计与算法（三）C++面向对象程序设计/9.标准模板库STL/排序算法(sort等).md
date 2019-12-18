@@ -38,6 +38,61 @@
       return 0;
   }
   ```
+  ```c++
+  #include <iostream>
+#include <algorithm>
+#include <string>
+#include <vector>
+using namespace std;
+
+struct Student {
+    string name;
+    int id;
+    double gpa;
+};
+
+struct Rule1 {
+    bool operator()(const Student& a, const Student& b) const{
+        return (a.name<b.name);
+    }
+};
+
+struct Rule2 {
+    bool operator()(const Student& a, const Student& b) const{
+        return (a.id<b.id);
+    }
+};
+
+struct Rule3 {
+    bool operator()(const Student& a, const Student& b) const{
+        return (a.gpa>b.gpa);
+    }
+};
+
+int main() {
+
+    vector<Student> students{{"Jack",112,3.4},{"Mary",102,3.8},{"Mary",117,3.9},
+                          {"Ala",333,3.5},{"Zero",101,4.0}};
+
+    // 姓名从小到大排序
+    sort(students.begin(), students.end(), Rule1());
+    for_each(students.begin(), students.end(), [](const Student &stu){cout<<"("<<stu.name<<","<<stu.id<<","<<stu.gpa<<") ";});
+    cout<<endl; // (Ala,333,3.5) (Jack,112,3.4) (Mary,102,3.8) (Mary,117,3.9) (Zero,101,4)
+
+    // id从小到大排序
+    sort(students.begin(), students.end(), Rule2());
+    for_each(students.begin(), students.end(), [](const Student &stu){cout<<"("<<stu.name<<","<<stu.id<<","<<stu.gpa<<") ";});
+    cout<<endl; // (Zero,101,4) (Mary,102,3.8) (Jack,112,3.4) (Mary,117,3.9) (Ala,333,3.5)
+
+    // gpa从大到小排序
+    sort(students.begin(), students.end(), Rule3());
+    for_each(students.begin(), students.end(), [](const Student &stu){cout<<"("<<stu.name<<","<<stu.id<<","<<stu.gpa<<") ";});
+    cout<<endl; // (Zero,101,4) (Mary,117,3.9) (Mary,102,3.8) (Ala,333,3.5) (Jack,112,3.4) 
+
+    return 0;
+}
+  ```
+
 
   
 
