@@ -38,8 +38,8 @@
       return 0;
   }
   ```
-  ```c++
-  #include <iostream>
+```c++
+#include <iostream>
 #include <algorithm>
 #include <string>
 #include <vector>
@@ -91,7 +91,7 @@ int main() {
 
     return 0;
 }
-  ```
+```
 
 
   
