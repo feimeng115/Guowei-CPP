@@ -136,7 +136,7 @@ class map {
 };
 ```
 
-* 基本和multimap一样，只不过关键字(first成员变量)各不相同
+* 基本和multimap一样，只不过关键字(first成员变量)各不相同， 因此插入元素可能失败
 * map还比mutimap多了个[ ]成员函数， 若pairs为map模版类的对象pairs[key]， 则：
   * 返回对关键字等于key的元素的值(second成员变量）的引用
   * 若没有关键字为key的元素，则会往pairs里插入一个关键字为key的元素，其值用无参
@@ -184,7 +184,79 @@ int main() {
 }
 ```
 
+# map例题：单词词频统计
 
+```
+输入大量单词，每个单词，一行，不超过20字符，没有空格。 按出现次数从多到少输出这些单词及其出现次数。出现次数相同的，字典序靠前的在前面
+输入样例：
+this
+is
+ok
+this
+plus
+that
+is
+plus
+plus
+输出样例：
+plus 3
+is 2
+this 2
+ok 1
+that 1
+```
+
+```c++
+#include <iostream>
+#include <string>
+#include <map>
+#include <set>
+using namespace std;
+
+struct Word {
+    string wd;
+    int times{};
+};
+
+struct Rule {
+    bool operator()(const Word& w1, const Word& w2) const {
+        if (w1.times != w2.times) {
+            return (w1.times > w2.times);
+        } else {
+            return (w1.wd < w2.wd);
+        }
+    }
+};
+
+int main() {
+    string s;
+    map<string, int> mp;
+    set<Word, Rule> st;
+
+    // 插入单词和统计单词的个数
+    while (cin >> s) {
+        ++mp[s]; // mp[s]返回的是second部分的引用
+    }
+
+    // 将mp数据放入set中
+    for (const auto& it:mp) {
+        cout << "(" << it.first << ", " << it.second << ") " << endl;
+
+        Word tmp;
+        tmp.wd = it.first;
+        tmp.times = it.second;
+
+        st.insert(tmp);
+    }
+
+    // 已在set中按照"Rule"完成规则比较, 直接打印输出结果
+    for (const auto& it : st) {
+        cout << it.wd << " " << it.times << endl;
+    }
+
+    return 0;
+}
+```
 
 
 
